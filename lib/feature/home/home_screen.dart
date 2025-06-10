@@ -1,14 +1,16 @@
+import 'package:ecommerce_app/feature/home/view/cat_view.dart';
+import 'package:ecommerce_app/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ecommerce_app/feature/cart/cart_presenter.dart';
 import 'package:ecommerce_app/feature/cart/cart_screen.dart';
 import 'package:ecommerce_app/feature/home/home_presenter.dart';
 import 'package:ecommerce_app/feature/search/search_screen.dart';
 import 'package:ecommerce_app/widgets/list_product_card.dart';
-
-import '../../widgets/base_widget.dart';
-import '../../widgets/header_widget.dart';
-import '../detail_product/detail_product_screen.dart';
+import 'package:ecommerce_app/widgets/base_widget.dart';
+import 'package:ecommerce_app/widgets/header_widget.dart';
+import 'package:ecommerce_app/feature/detail_product/detail_product_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     presenter.getCategory().whenComplete(() {
       presenter.getListProduct();
     });
@@ -32,10 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight) / 3;
-    final double itemWidth = size.width / 2.7;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -83,62 +80,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: presenter.listCat.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
+                      return CatView(
+                        category: presenter.listCat[index],
+                        onClick: () {
                           presenter.changeCat(index);
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 12,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color:
-                                presenter.isCatSelected(index)
-                                    ? Colors.green
-                                    : Colors.white,
-                          ),
-                          child: Text(
-                            presenter.listCat[index],
-                            style: TextStyle(
-                              color:
-                                  presenter.isCatSelected(index)
-                                      ? Colors.white
-                                      : Colors.black,
-                            ),
-                          ),
-                        ),
+                        isSelected: presenter.isCatSelected(index),
                       );
                     },
                   ),
                 )
                 : const SizedBox(),
+            Space(h: 10),
             presenter.listProduct.isNotEmpty
-                ? GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: presenter.listProduct.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: (itemWidth / itemHeight),
-                  ),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListProductCard(
-                        product: presenter.listProduct[index],
-                        onClick: () {
-                          BaseWidget.push(
-                            context,
-                            DetailProductScreen(
-                              product: presenter.listProduct[index],
+                ? StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  children:
+                      presenter.listProduct
+                          .map(
+                            (item) => ListProductCard(
+                              product: item,
+                              onClick: () {
+                                BaseWidget.push(
+                                  context,
+                                  DetailProductScreen(product: item),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  },
+                          )
+                          .toList(),
                 )
                 : const SizedBox(),
           ],

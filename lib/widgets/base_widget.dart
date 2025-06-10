@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 class BaseWidget {
   static TextStyle mainTextStyle(
-      {double size = 12,
+      {double size = 14,
       Color colors = Colors.black,
-      FontWeight fWeight = FontWeight.bold}) {
+      FontWeight fWeight = FontWeight.normal}) {
     return TextStyle(color: colors, fontSize: size, fontWeight: fWeight);
   }
 
   static TextStyle h1TextStyle() {
     return const TextStyle(
-        color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold);
+        color: Colors.black, fontSize: 24, fontWeight: FontWeight.normal);
   }
 
   static void push(BuildContext ctx, Widget widget) {
