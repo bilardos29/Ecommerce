@@ -18,6 +18,7 @@ class MainButton extends StatelessWidget {
           ),
           elevation: 0,
           minimumSize: Size(MediaQuery.of(context).size.width, 52),
+          backgroundColor: Colors.redAccent
         ),
         child: Text(text,
             style: BaseWidget.mainTextStyle(colors: Colors.white, size: 16)));

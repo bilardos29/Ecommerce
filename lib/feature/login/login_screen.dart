@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ecommerce_app/feature/list_product/home_presenter.dart';
-import 'package:ecommerce_app/feature/list_product/home_screen.dart';
+import 'package:ecommerce_app/feature/home/home_presenter.dart';
+import 'package:ecommerce_app/feature/home/home_screen.dart';
 import 'package:ecommerce_app/widgets/base_widget.dart';
 import 'package:ecommerce_app/widgets/inputtext_widgets.dart';
 

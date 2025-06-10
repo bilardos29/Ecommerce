@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce_app/feature/cart/cart_presenter.dart';
 import 'package:ecommerce_app/feature/detail_product/detail_product_presenter.dart';
-import 'package:ecommerce_app/feature/list_product/home_presenter.dart';
+import 'package:ecommerce_app/feature/home/home_presenter.dart';
 
+import 'feature/home/home_screen.dart';
 import 'feature/login/login_presenter.dart';
-import 'feature/login/login_screen.dart';
 import 'feature/search/search_presenter.dart';
 
 void main() {
@@ -41,6 +41,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
             ),
-            home: const LoginScreen()));
+            home: const HomeScreen()));
   }
 }
