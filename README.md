@@ -9,8 +9,8 @@ Aplikasi kasir sederhana untuk membantu UMKM dalam mencatat penjualan dan mengel
 - 📊 Laporan Penjualan
 
 ## 📸 Screenshot
-
 <img alt="Dashboard" height="500" src="screenshot/capture_home.png" width="200"/>
+<img alt="Dashboard" height="500" src="screenshot/capture_detail.png" width="200"/>
 
 ## 🔧 Instalasi
 1. Clone repo:

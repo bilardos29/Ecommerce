@@ -12,7 +12,7 @@ class BaseWidget {
 
   static TextStyle h1TextStyle() {
     return const TextStyle(
-        color: Colors.black, fontSize: 24, fontWeight: FontWeight.normal);
+        color: Colors.black, fontSize: 25, fontWeight: FontWeight.normal);
   }
 
   static void push(BuildContext ctx, Widget widget) {

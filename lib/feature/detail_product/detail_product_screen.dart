@@ -3,11 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:ecommerce_app/feature/cart/cart_presenter.dart';
 import 'package:ecommerce_app/feature/cart/cart_screen.dart';
 import 'package:ecommerce_app/model/product.dart';
-
-import '../../widgets/base_widget.dart';
-import '../../widgets/main_button.dart';
-import '../../widgets/review_widget.dart';
-import '../../widgets/space_widget.dart';
+import 'package:ecommerce_app/widgets/base_widget.dart';
+import 'package:ecommerce_app/widgets/main_button.dart';
+import 'package:ecommerce_app/widgets/review_widget.dart';
+import 'package:ecommerce_app/widgets/space_widget.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final Product product;
@@ -61,14 +60,14 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               children: [
                 Text('USD ${widget.product.price ?? 0}',
                     style: BaseWidget.mainTextStyle(
-                        size: 16, colors: Colors.green)),
+                        size: 20, colors: Colors.green)),
                 Image.asset("images/ic_like.png",
-                    width: 20, height: 20, color: Colors.green)
+                    width: 20, height: 20, color: Colors.grey)
               ],
             ),
-            const Space(h: 8),
+            const Space(h: 10),
             Text(widget.product.title ?? '', style: BaseWidget.h1TextStyle()),
-            const Space(h: 8),
+            const Space(h: 10),
             Row(
               children: [
                 ReviewWidget(
@@ -82,12 +81,13 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             ),
             const Space(h: 16),
             Text(widget.product.description ?? '',
-                overflow: TextOverflow.fade, style: BaseWidget.mainTextStyle()),
+                overflow: TextOverflow.fade, style: BaseWidget.mainTextStyle(size: 16)),
           ],
         ),
       ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(16),
+      bottomSheet: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: MainButton(
           'Add to Cart',
           onClick: () {
