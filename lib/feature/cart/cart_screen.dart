@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:ecommerce_app/feature/cart/cart_presenter.dart';
 import 'package:ecommerce_app/model/cart_product.dart';
 import 'package:ecommerce_app/widgets/base_widget.dart';
 import 'package:ecommerce_app/widgets/cart_product_card.dart';
 
-import '../../widgets/checkout_button.dart';
-import '../../widgets/space_widget.dart';
+import 'package:ecommerce_app/widgets/checkout_button.dart';
+import 'package:ecommerce_app/widgets/space_widget.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -16,11 +17,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  late CartPresenter presenter;
+  late CartPresenter presenter = context.watch<CartPresenter>();
 
   @override
   Widget build(BuildContext context) {
-    presenter = Provider.of<CartPresenter>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -38,7 +38,9 @@ class _CartScreenState extends State<CartScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  presenter.deleteAllCart();
+                },
                 child: const Icon(Icons.delete, color: Colors.black54)),
           )
         ],
@@ -88,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
                       colors: Colors.black54,
                       fWeight: FontWeight.w500)),
               Text(
-                'USD ${presenter.totalCartPrice}',
+                'USD ${NumberFormat('#,##,000.##').format(presenter.totalCartPrice)}',
                 style: BaseWidget.mainTextStyle(size: 14),
               ),
             ]),

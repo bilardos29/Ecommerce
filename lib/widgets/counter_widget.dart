@@ -21,15 +21,16 @@ class CounterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          IconButtonWidget(Icons.remove, onClick: onMinus),
-          const Space(w: 12),
-          Text('$total', style: BaseWidget.mainTextStyle()),
-          const Space(w: 12),
-          IconButtonWidget(Icons.add, onClick: onAdd),
-        ]),
+        Expanded(
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            IconButtonWidget(Icons.remove, onClick: onMinus),
+            const Space(w: 12),
+            Text('$total', style: BaseWidget.mainTextStyle()),
+            const Space(w: 12),
+            IconButtonWidget(Icons.add, onClick: onAdd),
+          ]),
+        ),
         IconButton(
           icon: Icon(Icons.delete, color: Colors.black54, size: 20),
           onPressed: onDelete,

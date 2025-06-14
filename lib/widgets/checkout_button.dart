@@ -17,6 +17,7 @@ class CheckoutButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
+          backgroundColor: Colors.redAccent,
           elevation: 0,
           minimumSize: Size(MediaQuery.of(context).size.width, 52),
         ),

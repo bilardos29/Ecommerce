@@ -51,7 +51,7 @@ class CartPresenter extends ChangeNotifier {
   Future<void> addIntoCart({int user = 3, required Product product}) async {
     var data = {
       "userId": '$user',
-      "date": '2023-12-28',
+      "u": '2023-12-28',
       "products": [
         {"productId": '${product.id}', "quantity": '1'}
       ]
@@ -80,7 +80,6 @@ class CartPresenter extends ChangeNotifier {
     api.request(
         onError: (val) {},
         onSuccess: (response) async {
-          print('success $response');
           notifyListeners();
         });
   }
@@ -96,9 +95,13 @@ class CartPresenter extends ChangeNotifier {
           totalCartPrice = totalCartItem == 0
               ? 0
               : totalCartPrice - (item.product!.price! * item.quantity!);
-          print('price ${item.product!.price} - $totalCartPrice');
           notifyListeners();
         });
+  }
+
+  deleteAllCart() {
+    listCartProduct.clear();
+    notifyListeners();
   }
 
   void addQuantity(CartProduct item) {

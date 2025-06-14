@@ -20,19 +20,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late HomePresenter presenter = context.read<HomePresenter>();
+  late HomePresenter presenter;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    presenter.getCategory().whenComplete(() {
-      presenter.getListProduct();
-    });
+    Future.microtask(
+      () => presenter.getCategory().whenComplete(() {
+        presenter.getListProduct();
+      }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    presenter = context.watch<HomePresenter>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -54,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(right: 12),
             child: InkWell(
               onTap: () {
-                //Push to Cart screen
                 context.read<CartPresenter>().getListCart().whenComplete(
                   () => BaseWidget.push(context, const CartScreen()),
                 );
